@@ -1,0 +1,97 @@
+dataset:
+  root: XXX  # Path to the dataset
+  image_folder: XXX  # name of the image folder
+
+training:
+  gpu: true  # Use GPU
+
+  max_iterations: 30000  # Maximum number of iterations
+
+  ssim_weight: 0.2  # Weight of SSIM loss
+  lambda_weight: 0.001  # Lagrange multiplier for RD loss
+
+  save_directory: XXX  # Path to save the experiment
+
+  save_interval: 10000  # Interval for saving checkpoints
+
+  disable_logging: true  # Disable logging, note that enabling logging will slow down the training
+
+  rate_loss_start_iteration: 3000  # Start iteration for rate loss
+
+  gpcc_codec_path: XXX  # Path to the GPCC codec
+
+  lr:  # Learning rate
+    gaussian:  # Gaussian parameters
+      means_lr_init: 0.0  # Initial learning rate for means of anchor primitives
+      means_lr_final: 0.0  # Final learning rate for means of anchor primitives
+      means_lr_delay_mult: 0.0  # Delay multiplier for means of anchor primitives
+
+      scales_lr_init: 0.007  # Learning rate for scaling vectors of anchor primitives
+      scales_lr_final: 0.007  # Final learning rate for scaling vectors of anchor primitives
+      scales_lr_delay_mult: 0.01  # Delay multiplier for scaling vectors of anchor primitives
+
+      rotations_lr_init: 0.002  # Learning rate for rotation quaternions of anchor primitives
+      rotations_lr_final: 0.002  # Final learning rate for rotation quaternions of anchor primitives
+      rotations_lr_delay_mult: 0.01  # Delay multiplier for rotation quaternions of anchor primitives
+
+      ref_feats_lr_init: 0.0075  # Learning rate for reference features
+      ref_feats_lr_final: 0.00005  # Final learning rate for reference features
+      ref_feats_lr_delay_mult: 0.01  # Delay multiplier for reference features
+
+      res_feats_lr_init: 0.0075  # Learning rate for residual features
+      res_feats_lr_final: 0.00005  # Final learning rate for residual features
+      res_feats_lr_delay_mult: 0.01  # Delay multiplier for residual features
+
+    prediction_net:  # Prediction network parameters
+      means_pred_mlp_lr_init: 0.002  # Initial learning rate for means prediction MLP
+      means_pred_mlp_lr_final: 0.00002  # Final learning rate for means prediction MLP
+      means_pred_mlp_lr_delay_mult: 0.01  # Delay multiplier for means prediction MLP
+
+      covariance_pred_mlp_lr_init: 0.004  # Initial learning rate for covariance prediction MLP
+      covariance_pred_mlp_lr_final: 0.00004  # Final learning rate for covariance prediction MLP
+      covariance_pred_mlp_lr_delay_mult: 0.01  # Delay multiplier for covariance prediction MLP
+
+      opacity_pred_mlp_lr_init: 0.002  # Initial learning rate for opacity prediction MLP
+      opacity_pred_mlp_lr_final: 0.00002  # Final learning rate for opacity prediction MLP
+      opacity_pred_mlp_lr_delay_mult: 0.01  # Delay multiplier for opacity prediction MLP
+
+      color_pred_mlp_lr_init: 0.008  # Initial learning rate for color prediction MLP
+      color_pred_mlp_lr_final: 0.00008  # Final learning rate for color prediction MLP
+      color_pred_mlp_lr_delay_mult: 0.01  # Delay multiplier for color prediction MLP
+
+    entropy_model:  # Entropy model parameters
+      ref_entropy_model_lr_init: 0.0002  # Initial learning rate for reference entropy prediction MLP
+      ref_entropy_model_lr_final: 0.00001  # Final learning rate for reference entropy prediction MLP
+      ref_entropy_model_lr_delay_mult: 0.01  # Delay multiplier for reference entropy prediction MLP
+
+      res_entropy_model_lr_init: 0.0002  # Initial learning rate for residual entropy prediction MLP
+      res_entropy_model_lr_final: 0.00001  # Final learning rate for residual entropy prediction MLP
+      res_entropy_model_lr_delay_mult: 0.01  # Delay multiplier for residual entropy prediction MLP
+
+      scale_entropy_model_lr_init: 0.0002  # Initial learning rate for scale entropy prediction MLP
+      scale_entropy_model_lr_final: 0.00001  # Final learning rate for scale entropy prediction MLP
+      scale_entropy_model_lr_delay_mult: 0.01  # Delay multiplier for scale entropy prediction MLP
+
+adaptive_control:
+  couple_threshold: 40  # Threshold for growing, only coupled primitives Gaussians assessed with more than this number of points will be considered to be grown
+  grad_threshold: 0.0001  # Gradient threshold for growing
+  opacity_threshold: 0.0008  # Opacity threshold for pruning
+
+  update_depth: 3  # Update depth for growing
+  update_hierarchy_factor: 4  # Update hierarchy factor for growing
+  update_init_factor: 16  # Update init factor for growing
+
+  stop_iteration: 15000  # Stop iteration for adaptive control
+
+  update_aux_start_base_interval: 3  # Start base interval for updating auxiliary, note that the actual interval is base * num of training views
+  control_start_base_interval: 5  # Start base interval for control, note that the actual interval is base * num of training views
+  control_base_interval: 2  # Base interval for control, note that the actual interval is base * num of training views
+
+gaussians:
+  voxel_size: 0.001  # Voxel size for voxelizing SfM points
+  derive_factor: 10  # Number of coupled primitives per anchor primitive
+
+  ref_feats_dim: 32  # Dimension of reference features of anchor primitives
+  ref_hyper_dim: 4  # Dimension of hyper-priors for reference features
+  res_feats_dim: 8  # Dimension of residual features of coupled primitives
+  res_hyper_dim: 1  # Dimension of hyper-priors for residual features

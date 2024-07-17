@@ -1,0 +1,16 @@
+compressai
+einops
+lpips
+numpy
+plyfile
+pytorch_msssim
+PyYAML
+tqdm
+tensorboard
+prettytable
+
+torch==2.0.0+cu118
+torch_scatter==2.1.2+pt20cu118
+torchvision==0.15.1+cu118
+
+
