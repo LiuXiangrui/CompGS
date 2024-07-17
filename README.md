@@ -85,7 +85,7 @@ If you find our work useful in your research, please consider citing:
 @inproceedings{liu2024compgs,
   title={CompGS: Efficient 3D Scene Representation via Compressed Gaussian Splatting},
   author={Liu, Xiangrui and Wu, Xinju and Zhang, Pingping and Wang, Shiqi and Li, Zhu and Kwong, Sam},
-  booktitle={Proceedings of the 32st ACM International Conference on Multimedia},
+  booktitle={Proceedings of the 32nd ACM International Conference on Multimedia},
   year={2024}
 }
 ```
